@@ -148,23 +148,27 @@ var SNAKE = (function(s, GRAPHICS) {
 		$(document).keydown(function(event) {
 			switch(event.keyCode) {
 				case KEYCODE_UP:
-					if(!gamePaused && s.currentHeading !== s.headings.south && !snakeIsUpdating) { 
+					if(!gamePaused && s.currentHeading !== s.headings.south && !snakeIsUpdating) {
 						s.currentHeading = s.headings.north;
+						// PUSH STATE TO SERVER
 					}
 					break;
 				case KEYCODE_DOWN:
 					if(!gamePaused && s.currentHeading !== s.headings.north && !snakeIsUpdating) { 
 						s.currentHeading = s.headings.south;
+						// PUSH STATE TO SERVER
 					}
 					break;
 				case KEYCODE_LEFT:
 					if(!gamePaused && s.currentHeading !== s.headings.west && !snakeIsUpdating) { 
 						s.currentHeading = s.headings.east;
+						// PUSH STATE TO SERVER
 					}
 					break;	
 				case KEYCODE_RIGHT:
 					if(!gamePaused && s.currentHeading !== s.headings.east && !snakeIsUpdating) { 
 						s.currentHeading = s.headings.west;
+						// PUSH STATE TO SERVER
 					}
 					break;
 				case KEYCODE_R:
@@ -184,6 +188,7 @@ var SNAKE = (function(s, GRAPHICS) {
 					if(gamePaused) {
 						s.play();
 					}else {
+						// PUSH STATE TO SERVER TO TELL OTHERS THAT GAME IS PAUSED
 						s.pause();
 					}
 					break;	
@@ -192,6 +197,7 @@ var SNAKE = (function(s, GRAPHICS) {
 					if(gamePaused) {
 						s.play();
 					}else {
+						// PUSH STATE TO SERVER TO TELL OTHERS THAT GAME IS PAUSED
 						s.pause();
 					}
 					break;
