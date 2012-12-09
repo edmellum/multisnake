@@ -1,4 +1,4 @@
-var SNAKE = (function(s) {
+var SNAKE = (function(s, GRAPHICS) {
 	//Public object
 	var s = {};
 	s.version = "0.1";
@@ -66,9 +66,9 @@ var SNAKE = (function(s) {
 	}
 	
 	function createGameBoard(sizeX, sizeY) {
-		gameBoard = new Array(sizeX);
-		for (i=0; i < gameBoard.length; ++i) {
-			gameBoard[i] = new Array(sizeY);
+		gameBoard = []; 
+		for (i=0; i < sizeX; ++i) {
+			gameBoard[i] = [];
 		}
 	}
 	
@@ -108,14 +108,12 @@ var SNAKE = (function(s) {
 					}
 				}
 				
-				penalty = Math.min(Math.max((new Date() - lastEatTime), 0), 10000);
-				console.log(penalty);
+				var penalty = Math.min(Math.max((new Date() - lastEatTime), 0), 10000);
 				gameScore += 10000 - penalty;
 
 				lastEatTime = new Date();
 				updateGameScore();
 				initFoods(1);
-				//AUDIO.play("audioEat");
 				//Draw food
 				for (i=0; i < SNAKE.food.length; ++i) {
 					GRAPHICS.drawBox(SNAKE.food[i].posX,SNAKE.food[i].posY, "blue");
@@ -168,7 +166,7 @@ var SNAKE = (function(s) {
 					if(!gamePaused && s.currentHeading !== s.headings.east && !snakeIsUpdating) { 
 						s.currentHeading = s.headings.west;
 					}
-					break;					
+					break;
 				case KEYCODE_R:
 					console.log("R PRESSED");
 					s.restart();
@@ -222,7 +220,6 @@ var SNAKE = (function(s) {
 	}
 	
 	function gameOver() {
-		//AUDIO.play("gameOver");
 		GRAPHICS.drawEndScreen("black", gameScore);
 		s.pause();
 		alert("GAME OVER - SCORE:" + gameScore);
@@ -277,4 +274,4 @@ var SNAKE = (function(s) {
 	}
 	
 	return s;
-})(SNAKE || {});
+})(SNAKE || {}, GRAPHICS);

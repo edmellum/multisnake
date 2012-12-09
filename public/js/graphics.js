@@ -23,12 +23,9 @@ var GRAPHICS = (function (g) {
 			//Draw walls
 			g.drawWalls("red");
 			
-			
 			return true;
 		}
-		else {
-			return false;
-		}
+		return false;
 	};
 	
 	g.drawWalls = function(fillStyle) {
@@ -39,10 +36,6 @@ var GRAPHICS = (function (g) {
 	g.drawBox = function(x,y, fillStyle) {
 		g.context.fillStyle = fillStyle;
 		g.context.fillRect(x*(g.canvasWidth/SNAKE.getGameboardSize().xSize), y*(g.canvasHeight/SNAKE.getGameboardSize().ySize), g.canvasWidth/SNAKE.getGameboardSize().xSize, g.canvasHeight/SNAKE.getGameboardSize().ySize);
-		//console.log("drawBox called @ x:",x,"y:", y, " size = ", 
-		//(g.canvasWidth/SNAKE.getGameboardSize().xSize), "x", 
-		//(g.canvasWidth/SNAKE.getGameboardSize().ySize), "fillStyle 
-		//=",g.context.fillStyle);
 	}
 	
 	g.drawEndScreen = function(fillStyle, score) {
