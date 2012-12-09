@@ -73,7 +73,7 @@ var SNAKE = (function(s) {
 	}
 	
 	function createSnake(length) {
-		s.snake = new Array();
+		s.snake = [];
 		for (i=0; i < length; i++) {
 			var newSnakePart = new snakePart(GAMEBOARD_XSIZE/2, (GAMEBOARD_XSIZE/2)-i);
 			s.snake.push(newSnakePart);
@@ -115,7 +115,7 @@ var SNAKE = (function(s) {
 				lastEatTime = new Date();
 				updateGameScore();
 				initFoods(1);
-				AUDIO.play("audioEat");
+				//AUDIO.play("audioEat");
 				//Draw food
 				for (i=0; i < SNAKE.food.length; ++i) {
 					GRAPHICS.drawBox(SNAKE.food[i].posX,SNAKE.food[i].posY, "blue");
@@ -129,7 +129,7 @@ var SNAKE = (function(s) {
 	}
 	
 	function initFoods(items) {
-		s.food = new Array();
+		s.food = [];
 		for(i=0;i < items;i++) {
 			var randPosX = Math.round(Math.random()*(GAMEBOARD_XSIZE-2));
 			var randPosY = Math.round(Math.random()*(GAMEBOARD_XSIZE-2));
@@ -222,7 +222,7 @@ var SNAKE = (function(s) {
 	}
 	
 	function gameOver() {
-		AUDIO.play("gameOver");
+		//AUDIO.play("gameOver");
 		GRAPHICS.drawEndScreen("black", gameScore);
 		s.pause();
 		alert("GAME OVER - SCORE:" + gameScore);

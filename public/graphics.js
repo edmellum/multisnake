@@ -5,8 +5,8 @@ var GRAPHICS = (function (g) {
 	g.canvasHeight = 500;
 	
 	g.init = function() {
-		if($("#snakeCanvas")[0].getContext) {
-			g.context = $("#snakeCanvas")[0].getContext("2d");
+		if($("#snakeBoard")[0].getContext) {
+			g.context = $("#snakeBoard")[0].getContext("2d");
 			g.clearAll();
 			//Initial drawup
 			
