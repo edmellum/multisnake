@@ -14,6 +14,7 @@
   "author": "",
   "license": "BSD",
   "dependencies": {
-    "ecstatic": "~0.3.0"
+    "ecstatic": "~0.3.0",
+    "socket.io": "~0.9.11"
   }
 }
