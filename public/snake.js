@@ -73,7 +73,7 @@ var SNAKE = (function(s) {
 	}
 	
 	function createSnake(length) {
-		s.snake = new Array();
+		s.snake = [];
 		for (i=0; i < length; i++) {
 			var newSnakePart = new snakePart(GAMEBOARD_XSIZE/2, (GAMEBOARD_XSIZE/2)-i);
 			s.snake.push(newSnakePart);
@@ -115,7 +115,7 @@ var SNAKE = (function(s) {
 				lastEatTime = new Date();
 				updateGameScore();
 				initFoods(1);
-				AUDIO.play("audioEat");
+				//AUDIO.play("audioEat");
 				//Draw food
 				for (i=0; i < SNAKE.food.length; ++i) {
 					GRAPHICS.drawBox(SNAKE.food[i].posX,SNAKE.food[i].posY, "blue");
@@ -129,7 +129,7 @@ var SNAKE = (function(s) {
 	}
 	
 	function initFoods(items) {
-		s.food = new Array();
+		s.food = [];
 		for(i=0;i < items;i++) {
 			var randPosX = Math.round(Math.random()*(GAMEBOARD_XSIZE-2));
 			var randPosY = Math.round(Math.random()*(GAMEBOARD_XSIZE-2));
@@ -222,7 +222,7 @@ var SNAKE = (function(s) {
 	}
 	
 	function gameOver() {
-		AUDIO.play("gameOver");
+		//AUDIO.play("gameOver");
 		GRAPHICS.drawEndScreen("black", gameScore);
 		s.pause();
 		alert("GAME OVER - SCORE:" + gameScore);
@@ -278,93 +278,3 @@ var SNAKE = (function(s) {
 	
 	return s;
 })(SNAKE || {});
-
-var GRAPHICS = (function (g) {
-	var g = {};
-	g.context;
-	g.canvasWidth = 500;
-	g.canvasHeight = 500;
-	
-	g.init = function() {
-		if($("#snakeCanvas")[0].getContext) {
-			g.context = $("#snakeCanvas")[0].getContext("2d");
-			g.clearAll();
-			//Initial drawup
-			
-			//Draw snake
-			for (i=0; i < SNAKE.snake.length; ++i) {
-				g.drawBox(SNAKE.snake[i].posX,SNAKE.snake[i].posY, "black");
-			}
-			
-			//Draw food
-			for (i=0; i < SNAKE.food.length; ++i) {
-				g.drawBox(SNAKE.food[i].posX,SNAKE.food[i].posY, "red");
-			}
-			
-			//Draw walls
-			g.drawWalls("red");
-			
-			
-			return true;
-		}
-		else {
-			return false;
-		}
-	};
-	
-	g.drawWalls = function(fillStyle) {
-		g.context.fillStyle = "white";
-		g.context.fillStyle = "black";
-	}
-		
-	g.drawBox = function(x,y, fillStyle) {
-		g.context.fillStyle = fillStyle;
-		g.context.fillRect(x*(g.canvasWidth/SNAKE.getGameboardSize().xSize), y*(g.canvasHeight/SNAKE.getGameboardSize().ySize), g.canvasWidth/SNAKE.getGameboardSize().xSize, g.canvasHeight/SNAKE.getGameboardSize().ySize);
-		//console.log("drawBox called @ x:",x,"y:", y, " size = ", 
-		//(g.canvasWidth/SNAKE.getGameboardSize().xSize), "x", 
-		//(g.canvasWidth/SNAKE.getGameboardSize().ySize), "fillStyle 
-		//=",g.context.fillStyle);
-	}
-	
-	g.drawEndScreen = function(fillStyle, score) {
-		g.context.fillStyle = fillStyle;
-		g.context.fillRect(0,0,g.canvasWidth,g.canvasHeight, fillStyle);
-		g.context.textAlign = "center";
-		
-		g.context.fillStyle = "WHITE";
-		g.context.font="36pt Comfortaa";
-		g.context.fillText("GAME OVER!", g.canvasWidth/2, g.canvasWidth/2);		
-	
-		g.context.font="24pt Comfortaa";
-		g.context.fillText("SCORE: " + score, g.canvasWidth/2, (g.canvasWidth/2) + 100);	
-	}
-	
-	g.clearBox = function(x,y) {
-		g.context.clearRect(x*(g.canvasWidth/SNAKE.getGameboardSize().xSize), y*(g.canvasHeight/SNAKE.getGameboardSize().ySize), g.canvasWidth/SNAKE.getGameboardSize().xSize, g.canvasHeight/SNAKE.getGameboardSize().ySize);
-	}
-	
-	g.clearAll = function() {
-		g.context.clearRect(0,0,10000,100000);
-	}
-
-	return g;
-})(GRAPHICS || {});
-
-var AUDIO = (function(a) {
-	var a = {};
-	a.play = function(id) {
-		$("#" + id)[0].play();
-	}
-	
-	return a;
-})(AUDIO || {});
-
-$(document).ready(function() {
-	SNAKE.init();
-	if(GRAPHICS.init()) {
-		console.log("GRAPHICS init ok! yay!");
-	}
-	else {
-		//displayMessage("Your browser does not seem to support HTML5 canvas...");
-	}
-});
