@@ -12,5 +12,6 @@ var io = socketio.listen(httpServer);
 httpServer.listen(8080);
 
 io.sockets.on('connection', function(socket) {
+	players.push(socket.id);
 	socket.emit('players', players);
 });
