@@ -7,8 +7,16 @@ $(document).ready(function() {
 		//displayMessage("Your browser does not seem to support HTML5 canvas...");
 	}
 
-	var socket = io.connect('http://localhost');
+	window.socket = io.connect('http://localhost');
 	socket.on('players', function(players) {
 		console.log(players);
 	})
+
+	socket.on('highscores', function(scores){
+		var scoreboard = $("#highscore-container ul");
+		scoreboard.html("");
+		for(var i = 0; i < scores.length; i++){
+			scoreboard.append($("<li>" + scores[i].score + " - " + scores[i].name + "</li>"));
+		}
+	});
 });

@@ -129,8 +129,16 @@ var SNAKE = (function(s, GRAPHICS) {
 	function initFoods(items) {
 		s.food = [];
 		for(i=0;i < items;i++) {
-			var randPosX = Math.round(Math.random()*(GAMEBOARD_XSIZE-2));
-			var randPosY = Math.round(Math.random()*(GAMEBOARD_XSIZE-2));
+			var randPosX = Math.floor(Math.random()*(GAMEBOARD_XSIZE)+1);
+			var randPosY = Math.floor(Math.random()*(GAMEBOARD_YSIZE)+1);
+
+			if(randPosX > GAMEBOARD_XSIZE){
+				console.log('boundry violation X');
+			}
+			if(randPosY > GAMEBOARD_YSIZE){
+				console.log('boundry violation Y');
+			}
+
 			s.food.push(s.addFood(randPosX, randPosY));
 		}
 	}
@@ -228,8 +236,15 @@ var SNAKE = (function(s, GRAPHICS) {
 	function gameOver() {
 		GRAPHICS.drawEndScreen("black", gameScore);
 		s.pause();
-		alert("GAME OVER - SCORE:" + gameScore);
+		var name = prompt("YOU SCORED " + gameScore + " POINTS\n\nEnter your name for the highscore board:", "New player!");
+		if(name != null && name != undefined && name != ""){
+			registerScore(name, gameScore);
+		}
 		s.restart();
+	}
+	function registerScore(name, newScore){
+		socket.emit("score", {name: name, score: newScore});
+		console.log("Score registered: " + newScore + " for " + name);
 	}
 	
 	function updateSnakePosition() {
