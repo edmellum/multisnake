@@ -11,7 +11,7 @@
     "type": "git",
     "url": "https://github.com/edmellum/multisnake"
   },
-  "author": "David The Kid Mellum",
+  "author": "",
   "license": "BSD",
   "dependencies": {
     "ecstatic": "~0.3.0",
