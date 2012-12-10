@@ -36,11 +36,14 @@ io.sockets.on('connection', function(socket) {
 		scores = sortResults();
 		console.log("SCORE @" + score.score + " for " + score.name);
 		io.sockets.emit('highscores', scores);
+		io.sockets.emit('scoreUpdate', score);
 	});
 
 	socket.on('disconnect', function() {
 		delete players[socket.id];
 	});
+
+
 });
 
 function sortResults(){
