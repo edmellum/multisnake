@@ -15,7 +15,7 @@ httpServer.listen(8080);
 
 io.sockets.on('connection', function(socket) {
 	players[socket.id] = {};
-	socket.emit('players', players);
+	io.sockets.emit('players', players);
 
 	socket.on('update', function(player) {
 		io.sockets.emit('update', player);
@@ -40,6 +40,7 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('disconnect', function() {
 		delete players[socket.id];
+		io.sockets.emit('players', players);
 	});
 });
 Array.prototype.min = function() {

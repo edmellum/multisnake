@@ -9,7 +9,10 @@ $(document).ready(function() {
 
 	window.socket = io.connect('http://localhost');
 	socket.on('players', function(players) {
-		console.log(players);
+		$('#playerboard').empty();
+		for(key in players) {
+			$('#playerboard').append('<li>' + key + '</li>');
+		}
 	})
 
 	socket.on('highscores', function(scores){
