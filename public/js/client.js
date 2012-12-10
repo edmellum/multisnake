@@ -7,7 +7,7 @@ $(document).ready(function() {
 		//displayMessage("Your browser does not seem to support HTML5 canvas...");
 	}
 
-	window.socket = io.connect('http://localhost');
+	window.socket = io.connect();
 	socket.on('players', function(players) {
 		console.log(players);
 	})
@@ -19,4 +19,10 @@ $(document).ready(function() {
 			scoreboard.append($("<li>" + scores[i].score + " - " + scores[i].name + "</li>"));
 		}
 	});
+	socket.on('scoreUpdate', function(score) {
+		console.log("liveUpdate" + score.name);
+		var scoreUpdate = $("#liveUpdate h1");
+		scoreUpdate.text(score.name + " - " + score.score);
+		
+	})
 });
