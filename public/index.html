@@ -32,6 +32,7 @@
 			background-color: orange;
 			color: black;
 		}
+
 		#playerboard {
 			vertical-align: top;
 			display: inline-block;
@@ -39,6 +40,16 @@
 			background: red;
 			width: 200px;
 			min-height: 300px;
+		}
+
+		#liveUpdate{
+			position: absolute;
+			top: 10px;
+			left: 10px;
+		}
+
+		#liveUpdate h1{
+			color: teal;
 		}
 	</style>
 </head>
@@ -54,6 +65,11 @@
 		</div>
 
 		<ul id="playerboard"></ul>
+
+		<div id="liveUpdate">
+			<h1>Live updates!</H1>
+		</div>
+
 	</div>
 	<script src="http://code.jquery.com/jquery.min.js"></script>
 	<script src="/socket.io/socket.io.js"></script>
